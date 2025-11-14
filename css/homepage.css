@@ -1,0 +1,69 @@
+.hero-section {
+    width: 1521px;
+    height: 480px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.cards-section {
+    background-color: #F8F8F8;
+    padding: 50px 0;
+    width: 100%;
+}
+
+.cards-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 92px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.content-card {
+    width: 306px;
+    height: 436px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.content-card img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+.content-card .card-button {
+    background-color: #0388B4;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 40px 0;
+    display: inline-block;
+    min-width: 130px;
+    transition: background-color 0.2s ease;
+}
+
+.content-card .card-button:hover {
+    background-color: #044CC8;
+}
+
+.content-card p {
+    font-size: 14px;
+    color: #676C70;
+    line-height: 28px;
+    font-weight: 300;
+}

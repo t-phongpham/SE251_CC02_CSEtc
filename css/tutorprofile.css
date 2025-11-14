@@ -1,0 +1,228 @@
+:root {
+    --primary-blue: #0388B4;
+    --dark-blue-highlight: #044CC8;
+    --light-grey-bg: #F8F8F8;
+    --border-grey: #D9D9D9;
+    --text-dark: #1E1E1E;
+    --text-secondary: #757575;
+}
+
+
+.page-content-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+
+/* BREADCRUMB */
+.breadcrumbs {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 24px;
+}
+
+.breadcrumbs a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs span {
+    margin: 0 7px;
+}
+
+
+.profile-header-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+/* PROFILE */
+.profile-card {
+    width: 588px;
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-card-main {
+    display: flex;
+    gap: 16px;
+}
+
+.profile-photo {
+    width: 229px;
+    height: 247px;
+    object-fit: cover;
+    background: #E3E3E3;
+    flex-shrink: 0;
+}
+
+.profile-intro {
+    flex: 1;
+}
+
+.degree {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.tutor-name {
+    font-size: 32px;
+    color: var(--dark-blue-highlight);
+    font-weight: 700;
+    margin: 4px 0 0 0;
+}
+
+.profile-intro h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.profile-intro p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.profile-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.rating {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-select, .btn-message {
+    padding: 12px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 48px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    background: var(--light-grey-bg);
+    color: var(--text-secondary);
+    border: 1px solid #E5E5E5;
+}
+
+.btn-select.active,
+.btn-message.active {
+    background: #1E1E1E;
+    color: white;
+    border-color: #1E1E1E;
+}
+
+.btn-select:not(.active):hover, 
+.btn-message:not(.active):hover {
+    background: #e0e0e0;
+}
+
+
+/* PROFILE DETAIL */
+.profile-details {
+    width: 548px;
+    background: var(--light-grey-bg);
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.detail-item {
+    padding: 13px 8px;
+    border-bottom: 1px solid #E5E5E5;
+}
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0377B4;
+    margin: 0 0 4px 0;
+}
+
+.detail-item p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #E5E5E5;
+    margin: 24px 0;
+}
+
+
+/* REVIEW */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.review-card {
+    background: var(--light-grey-bg);
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.student-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0377B4;
+}
+
+.review-rating {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.review-body {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}

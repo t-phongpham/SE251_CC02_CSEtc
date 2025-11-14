@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select tutor - My Tutor</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <link rel="stylesheet" href="../css/selecttutor.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../css/lgBK.png" alt="Logo Bách Khoa">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../Student_Homepage/Student_Homepage.html">Home</a></li>
+                    <li><a href="../Student_Homepage/Student_Homepage.html">Dashboard</a></li>
+                    <li><a href="../Select_Tutor/Select_Tutor.html" class="active">Select tutor</a></li>
+                    <li><a href="../Schedule/Schedule.html">Schedule</a></li>
+                    <li><a href="#">Learning materials</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-nav">
+                <img src="../css/Bell.svg" alt="Icon 1">
+                <img src="../css/Message circle.svg" alt="Icon 2">
+                <img src="../css/avatar.png" alt="Avatar" class="avatar">
+                <img src="../css/Chevron down.svg" alt="Dropdown">
+            </div>
+        </div>
+    </header>
+
+    <div class="page-content-wrapper">
+        
+        <aside class="filter-sidebar">
+            <div class="filter-section">
+                <h3>Keywords</h3>
+                <div class="keywords-container">
+                    <span class="keyword-tag">Lecturer <button>&times;</button></span>
+                    <span class="keyword-tag">Online <button>&times;</button></span>
+                    <span class="keyword-tag">Subject <button>&times;</button></span>
+                    <span class="keyword-tag">Weekends <button>&times;</button></span>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Tutor type</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" checked> Lecturer</label>
+                    <label><input type="checkbox" checked> Graduate tutor</label>
+                    <label><input type="checkbox"> Undergraduate tutor</label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Availability</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Weekdays</label>
+                    <label><input type="checkbox" checked> Weekends</label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Teaching method</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Offline</label>
+                    <label><input type="checkbox" checked> Online</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="tutor-content">
+            
+            <div class="tutor-search-filters">
+                <input type="search" placeholder="Search">
+                <div class="filter-buttons">
+                    <button class="active">Available</button>
+                    <button>Rate ascending</button>
+                    <button>Rate descending</button>
+                </div>
+            </div>
+
+            <div class="tutor-grid">
+                
+                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
+                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
+                    <div class="tutor-card-info">
+                        <h3>Nguyễn Văn A</h3>
+                        <p>Calculus 1</p>
+                        <div class="rating">⭐ 4.5 (25)</div>
+                    </div>
+                </a>
+
+                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
+                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
+                    <div class="tutor-card-info">
+                        <h3>Nguyễn Văn B</h3>
+                        <p>Data Structures & Algorithms</p>
+                        <div class="rating">⭐ 4.9 (5)</div>
+                    </div>
+                </a>
+
+                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
+                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
+                    <div class="tutor-card-info">
+                        <h3>Nguyễn Văn C</h3>
+                        <p>Data Structures & Algorithms</p>
+                        <div class="rating">⭐ 4.5 (20)</div>
+                    </div>
+                </a>
+
+                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
+                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
+                    <div class="tutor-card-info">
+                        <h3>Nguyễn Văn D</h3>
+                        <p>Software Engineering</p>
+                        <div class="rating">⭐ 4.0 (50)</div>
+                    </div>
+                </a>
+
+                </div>
+        </main>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="footer-logo">
+                <img src="../css/lgBK.png" alt="Logo Bách Khoa"> <p style="text-align:center;">BÁCH KHOA MY TUTOR</span>
+            </div>
+
+            <div class="footer-links">
+                <h3>WEBSITE</h3>
+                <a href="#">HCMUT</a>
+                <a href="#">MyBK</a>
+                <a href="#">BKSI</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>CONTACT</h3>
+                <p>268 Ly Thuong Kiet Street Ward 14, District 10, Ho Chi Minh City, Vietnam</p>
+                <p>(028) 38 651 670 - (028) 38 647 256 (Ext: 5258, 5234)</p>
+                <p><a href="mailto:xxxxxxxxx@hcmut.edu.vn">xxxxxxxxx@hcmut.edu.vn</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

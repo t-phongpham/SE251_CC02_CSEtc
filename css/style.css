@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #1E1E1E;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* MAIN HEADER */
+.main-header {
+    background-color: #0388B4;
+    color: white;
+    height: 100px;
+    width: 100%;
+}
+
+.header-container {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.logo-container img {
+    height: 90px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.main-nav {
+    height: 100%;
+}
+
+.main-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    height: 100%;
+}
+
+.main-nav li {
+    display: flex;
+    height: 100%;
+}
+
+.main-nav a {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    transition: background-color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background-color: #044CC8;
+}
+
+.user-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.user-nav .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+/* MAIN FOOTER */
+.main-footer {
+    background-color: rgba(3, 136, 180, 0.71);
+    color: white;
+    padding: 40px 0;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.footer-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    box-sizing: border-box;
+}
+
+.footer-logo {
+    width: 120px;
+}
+
+.footer-logo img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer-logo span {
+    font-weight: 700;
+}
+
+.footer-links, .footer-contact {
+    flex: 1;
+    max-width: 270px;
+}
+
+.footer-links h3, .footer-contact h3 {
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.25px;
+}
+
+.footer-links a, .footer-contact p {
+    display: block;
+    color: white;
+    margin: 0;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
