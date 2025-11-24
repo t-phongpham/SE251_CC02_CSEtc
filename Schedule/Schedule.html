@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - My Tutor</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <link rel="stylesheet" href="../css/schedule.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../css/lgBK.png" alt="Logo Bách Khoa">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../Student_Homepage/Student_Homepage.html">Home</a></li>
+                    <li><a href="../Student_Homepage/Student_Homepage.html">Dashboard</a></li>
+                    <li><a href="../Select_Tutor/Select_Tutor.html">Select tutor</a></li>
+                    <li><a href="../Schedule/Schedule.html" class="active">Schedule</a></li>
+                    <li><a href="#">Learning materials</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-nav">
+                <img src="../css/Bell.svg" alt="Icon 1">
+                <img src="../css/Message circle.svg" alt="Icon 2">
+                <img src="../css/avatar.png" alt="Avatar" class="avatar">
+                <img src="../css/Chevron down.svg" alt="Dropdown">
+            </div>
+        </div>
+    </header>
+
+    <div class="page-content-wrapper">
+        
+        <h1>Registered tutor sessions</h1>
+
+        <div class="schedule-filters">
+            <input type="search" placeholder="Search" class="search-bar">
+            <div class="filter-buttons">
+                <button class="active">Editable</button>
+                <button>Locked</button>
+            </div>
+        </div>
+
+        <div class="session-list">
+            
+            <div class="session-card" id="session-card-1" onclick="openModal()">
+                <div class="card-header">
+                    <span class="session-number">1</span>
+                    <h3 class="session-title">CO3001 - Software Engineering</h3>
+                    <span class="session-tutor">Nguyễn K</span>
+                    <button class="delete-btn">&times;</button> </div>
+                <div class="card-body">
+                    <div class="timeslot-row">
+                        <div class="detail-item">
+                            <h4>Group code</h4>
+                            <p>CC09</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Capacity</h4>
+                            <p>2/5</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Day</h4>
+                            <p>Monday</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Time slot</h4>
+                            <p>--34------------</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Teaching week</h4>
+                            <p>45</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Room</h4>
+                            <p>B4 - 201</p>
+                        </div>
+                    </div>
+                    <hr class="timeslot-divider">
+                    <div class="timeslot-row">
+                        <div class="detail-item">
+                            <h4>Group code</h4>
+                            <p>CC09</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Capacity</h4>
+                            <p>2/5</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Day</h4>
+                            <p>Wednesday</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Time slot</h4>
+                            <p>-23-------------</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Teaching week</h4>
+                            <p>45</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Room</h4>
+                            <p>B4 - 201</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-card" id="session-card-2" onclick="openModal()">
+                <div class="card-header">
+                    <span class="session-number">2</span>
+                    <h3 class="session-title">CO2004 - Data Structures & Algorithms</h3>
+                    <span class="session-tutor">Nguyễn Văn B</span>
+                    <button class="delete-btn">&times;</button>
+                </div>
+                <div class="card-body">
+                    <div class="timeslot-row">
+                        <div class="detail-item">
+                            <h4>Group code</h4>
+                            <p>CC03</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Capacity</h4>
+                            <p>5/5</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Day</h4>
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Time slot</h4>
+                            <p>-23-------------</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Teaching week</h4>
+                            <p>45</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Room</h4>
+                            <p>B1 - 201</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-card" id="session-card-3" onclick="openModal()">
+                <div class="card-header">
+                    <span class="session-number">3</span>
+                    <h3 class="session-title">MT1005 - Calculus 2</h3>
+                    <span class="session-tutor">Nguyễn Văn C</span>
+                    <button class="delete-btn">&times;</button>
+                </div>
+                <div class="card-body">
+                    <div class="timeslot-row">
+                        <div class="detail-item">
+                            <h4>Group code</h4>
+                            <p>CC01</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Capacity</h4>
+                            <p>1/5</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Day</h4>
+                            <p>Thursday</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Time slot</h4>
+                            <p>---456----------</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Teaching week</h4>
+                            <p>45</p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Room</h4>
+                            <p>B4 - 205</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="footer-logo">
+                <img src="../css/lgBK.png" alt="Logo Bách Khoa"> <p style="text-align:center;">BÁCH KHOA MY TUTOR</span>
+            </div>
+
+            <div class="footer-links">
+                <h3>WEBSITE</h3>
+                <a href="#">HCMUT</a>
+                <a href="#">MyBK</a>
+                <a href="#">BKSI</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>CONTACT</h3>
+                <p>268 Ly Thuong Kiet Street Ward 14, District 10, Ho Chi Minh City, Vietnam</p>
+                <p>(028) 38 651 670 - (028) 38 647 256 (Ext: 5258, 5234)</p>
+                <p><a href="mailto:xxxxxxxxx@hcmut.edu.vn">xxxxxxxxx@hcmut.edu.vn</a></p>
+            </div>
+        </div>
+    </footer>
+
+<div id="changeGroupModal" class="modal-overlay">
+    
+    <div class="modal-content">
+        
+        <div class="modal-header">
+            <h2>Change group</h2>
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        
+        <div class="modal-subheader">
+            <span class="course-title">CO2004 - Data Structures & Algorithms</span>
+            <span class="tutor-name">Nguyễn Văn B</span>
+        </div>
+
+        <div class="modal-body">
+            <table class="group-table">
+                <thead>
+                    <tr>
+                        <th>Group code</th>
+                        <th>Capacity</th>
+                        <th>Registered</th>
+                        <th>Day</th>
+                        <th>Time slot</th>
+                        <th>Room</th>
+                        <th>Change group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CC01</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>Monday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC02</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>Monday</td>
+                        <td>----56----------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                    <tr class="current-group">
+                        <td>CC03</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>Tuesday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-delete-red" onclick="deleteCurrentGroup(this)">🗑️</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC04</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>Wednesday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC05</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>Thursday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC06</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>Thursday</td>
+                        <td>-----67---------</td>
+                        <td>Online</td>
+                        <td><button class="btn-change-grey" disabled>Change</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC07</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>Friday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                    <tr>
+                        <td>CC08</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>Saturday</td>
+                        <td>-23-------------</td>
+                        <td>B1 - 201</td>
+                        <td><button class="btn-change-blue" onclick="attemptChangeGroup()">Change</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+            <button class="close-btn-footer" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<div id="actionAllowedModal" class="modal-overlay warning-modal" onclick="closeWarningModal()">
+    
+    <div class="warning-modal-content">
+        <img src="Warning.png" alt="Cảnh báo" class="warning-icon">
+        
+        <h3 class="warning-title">Action not allowed</h3>
+        
+        <p class="warning-body">
+            You cannot enroll in multiple groups of the same course.<br>
+            Please change or remove your existing group first.
+        </p>
+
+        <button class="btn-cancel-red" onclick="closeWarningModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    var changeModal = document.getElementById("changeGroupModal");
+    var warningModal = document.getElementById("actionAllowedModal");
+
+    var userHasCurrentGroup = true; 
+
+    function openModal() {
+        userHasCurrentGroup = true; 
+        changeModal.style.display = "flex";
+    }
+
+    function closeModal() {
+        changeModal.style.display = "none";
+    }
+
+
+    function openWarningModal() {
+        warningModal.style.display = "flex";
+    }
+
+    function closeWarningModal() {
+        warningModal.style.display = "none";
+    }
+
+
+    function deleteCurrentGroup(buttonElement) {
+        buttonElement.closest('tr').remove();
+        userHasCurrentGroup = false; 
+    }
+
+    function attemptChangeGroup() {
+        if (userHasCurrentGroup) {
+            openWarningModal();
+        } 
+        else {
+            alert("Success! Group has been changed.");
+            closeModal();
+        }
+    }
+
+    window.onclick = function(event) {
+        if (event.target == changeModal) {
+            closeModal();
+        }
+        if (event.target == warningModal) {
+            closeWarningModal();
+        }
+    }
+</script>
+
+</body>
+</html>

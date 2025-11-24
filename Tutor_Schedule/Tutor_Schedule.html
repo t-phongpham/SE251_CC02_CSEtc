@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale:1.0">
+    <title>Homepage - My Tutor</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/Tutor_Schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="../css/lgBK.png" alt="Logo Bách Khoa">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../Tutor_Homepage/Tutor_Homepage.html" class="active">Home</a></li>
+                    <li><a href="../Tutor_Homepage/Tutor_Homepage.html">Dashboard</a></li>
+                    <li><a href="../Tutor_Schedule/Tutor_Schedule.html">Schedule</a></li>
+                    <li><a href="#">Learning materials</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-nav">
+                <img src="../css/Bell.svg" alt="Icon 1">
+                <img src="../css/Message circle.svg" alt="Icon 2">
+                <img src="../css/avatar.png" alt="Avatar" class="avatar">
+                <img src="../css/Chevron down.svg" alt="Dropdown">
+            </div>
+        </div>
+    </header>
+
+    <main>
+            <div class="calendar-header">
+                <div class="main-title">Calendar</div>
+                <div class="month-nav">
+                    <span>&#9664; October</span>
+                    <span class="current-month">November 2025</span>
+                    <span>December &#9654;</span>
+                </div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="day-name">Mon</div>
+                <div class="day-name">Tue</div>
+                <div class="day-name">Wed</div>
+                <div class="day-name">Thu</div>
+                <div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+                <div class="day-name">Sun</div>
+                </div>
+
+            <div class="modal-overlay" id="addModal">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <div class="modal-title">New event</div>
+                        <span class="close-btn" onclick="closeModal('addModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Event Title</label>
+                            <input type="text" id="eventTitle" class="form-control" placeholder="Chapter 9 Software Testing">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Date</label>
+                            <div class="input-group-row">
+                                <select id="eventDaySelect" class="form-control" style="width: 70px;">
+                                    <option value="21" selected>21</option>
+                                </select>
+                                <select class="form-control" style="flex: 2;"><option>November</option></select>
+                                <select class="form-control" style="flex: 1.5;"><option>2025</option></select>
+                                <select class="form-control" style="width: 70px;"><option>15</option></select>
+                                <select class="form-control" style="width: 70px;"><option>00</option></select>
+                                
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <label>Class</label>
+                            <div class="input-group-row">
+                                <input type="text" id="classCode" class="form-control" value="CC03" style="width: 30%;">
+                                <input type="text" id="className" class="form-control" value="Software Engineering">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <div class="input-group-row">
+                                <input type="text" class="form-control" value="BK - LTK">
+                                <input type="text" class="form-control" value="B1 - 311">
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" id="editingEventId">
+                    </div>
+                    <div class="btn-footer">
+                        <button class="btn btn-primary" onclick="saveEvent()">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-overlay" id="infoModal">
+                <div class="modal-box">
+                    <div class="modal-header info-header">
+                        <div class="modal-title" id="infoTitle">Event Title</div>
+                        <span class="close-btn" onclick="closeModal('infoModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="info-row">
+                            <i class="far fa-clock"></i>
+                            <span id="infoDate">Friday, 21 November, 15:00 - 17:00</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="far fa-calendar"></i>
+                            <span id="infoClass">Course Class</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="far fa-comment"></i>
+                            <div>
+                                Dear All,<br><br>
+                                Today lesson, we will learn about software testing. How to test a software quality & its importance.
+                                <br><br>Best wishes
+                            </div>
+                        </div>
+                        
+                        <div class="info-actions">
+                            <i class="fas fa-wrench action-icon" onclick="editCurrentEvent()"></i>
+                            <i class="fas fa-trash-alt action-icon" onclick="openAlertModal()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-overlay" id="alertModal">
+                <div class="modal-box" style="width: 400px;">
+                    <div class="alert-content">
+                        <div class="alert-icon">!</div>
+                        <h2 style="color: #666; margin: 10px 0;">Confirm</h2>
+                        <p style="color: #666;">Are you sure to delete this activity?</p>
+                        <div class="alert-actions">
+                            <button class="btn btn-primary" style="background-color: #008CBA;" onclick="confirmDelete()">Delete</button>
+                            <button class="btn btn-danger" style="background-color: #dc3545;" onclick="closeModal('alertModal')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Data Structure
+                // Now storing 'topic' (Event Title), 'code' (Class Code), and 'subject' (Class Name) separately
+                let events = [
+                    { id: 1, day: 1, topic: "Intro", code: "CC04", subject: "Software Construction" },
+                    { id: 2, day: 4, topic: "Basics", code: "CC01", subject: "Principles of Programming" },
+                    { id: 3, day: 6, topic: "SQL", code: "CC02", subject: "Data Structures" },
+                    { id: 4, day: 22, topic: "Testing", code: "CC04", subject: "Software Construction" }
+                ];
+
+                let selectedEventId = null;
+
+                function populateDaySelect() {
+                    const daySelect = document.getElementById('eventDaySelect');
+                    daySelect.innerHTML = '';
+                    for (let i = 1; i <= 30; i++) {
+                        let option = document.createElement('option');
+                        option.value = i;
+                        option.text = i;
+                        daySelect.appendChild(option);
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    populateDaySelect(); 
+                    renderCalendar();
+                });
+
+                function renderCalendar() {
+                    const grid = document.getElementById('calendarGrid');
+                    const headers = Array.from(grid.children).slice(0, 7);
+                    grid.innerHTML = ''; 
+                    headers.forEach(h => grid.appendChild(h));
+                    
+                    for(let i=0; i<5; i++) {
+                        let empty = document.createElement('div');
+                        empty.className = 'day-cell';
+                        empty.style.backgroundColor = '#fff'; 
+                        empty.style.cursor = 'default';
+                        grid.appendChild(empty);
+                    }
+
+                    for (let d = 1; d <= 30; d++) {
+                        let cell = document.createElement('div');
+                        cell.className = 'day-cell';
+                        cell.onclick = () => openAddModal(d);
+
+                        let num = document.createElement('div');
+                        num.className = 'day-number';
+                        num.innerText = d;
+                        cell.appendChild(num);
+
+                        const dayEvents = events.filter(e => e.day === d);
+                        dayEvents.forEach(ev => {
+                            let evDiv = document.createElement('div');
+                            evDiv.className = 'event-item';
+                            
+                            // --- CHANGED LOGIC HERE ---
+                            // Display = Class Code + space + Subject Name
+                            // Example: "CC03" + " " + "Software Engineering"
+                            // CSS 'text-overflow: ellipsis' handles the shortening to "CC03 Software..."
+                            evDiv.innerText = `${ev.code} ${ev.subject}`;
+                            
+                            evDiv.onclick = (e) => {
+                                e.stopPropagation(); 
+                                openInfoModal(ev.id);
+                            };
+                            cell.appendChild(evDiv);
+                        });
+                        grid.appendChild(cell);
+                    }
+                }
+
+                // --- Modals ---
+
+                function openAddModal(day, isEdit = false) {
+                    const modal = document.getElementById('addModal');
+                    modal.style.display = 'flex';
+
+                    if (!isEdit) {
+                        // Clear fields for new entry
+                        document.getElementById('editingEventId').value = '';
+                        document.getElementById('eventTitle').value = '';
+                        document.getElementById('eventDaySelect').value = day || 1;
+                        document.getElementById('classCode').value = 'CC03';
+                        document.getElementById('className').value = 'Software Engineering';
+                    }
+                }
+
+                function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                }
+
+                function saveEvent() {
+                    const idInput = document.getElementById('editingEventId').value;
+                    
+                    // Get values from inputs
+                    const topic = document.getElementById('eventTitle').value || "Class Session";
+                    const day = parseInt(document.getElementById('eventDaySelect').value);
+                    const code = document.getElementById('classCode').value; // e.g., CC03
+                    const subject = document.getElementById('className').value; // e.g., Software Engineering
+
+                    if (idInput) {
+                        // Edit existing
+                        const idx = events.findIndex(e => e.id == idInput);
+                        if(idx !== -1) {
+                            events[idx].topic = topic;
+                            events[idx].day = day;
+                            events[idx].code = code;
+                            events[idx].subject = subject;
+                        }
+                    } else {
+                        // Create new
+                        const newEvent = {
+                            id: Date.now(),
+                            day: day,
+                            topic: topic,
+                            code: code,
+                            subject: subject
+                        };
+                        events.push(newEvent);
+                    }
+
+                    closeModal('addModal');
+                    renderCalendar(); 
+                }
+
+                function openInfoModal(id) {
+                    const ev = events.find(e => e.id === id);
+                    if (!ev) return;
+                    selectedEventId = id;
+                    
+                    // Show the Event Title (Topic) in the header, or construct it however preferred
+                    // Usually, detailed view might show the Topic
+                    document.getElementById('infoTitle').innerText = `${ev.code} - ${ev.topic}`; 
+                    
+                    document.getElementById('infoDate').innerText = `${ev.day} November, 15:00 - 17:00`;
+                    document.getElementById('infoClass').innerText = ev.subject; // Show subject name in class field
+                    document.getElementById('infoModal').style.display = 'flex';
+                }
+
+                function openAlertModal() {
+                    document.getElementById('alertModal').style.display = 'flex';
+                }
+
+                function confirmDelete() {
+                    if (selectedEventId) {
+                        events = events.filter(e => e.id !== selectedEventId);
+                        selectedEventId = null;
+                        closeModal('alertModal');
+                        closeModal('infoModal');
+                        renderCalendar();
+                    }
+                }
+
+                function editCurrentEvent() {
+                    const ev = events.find(e => e.id === selectedEventId);
+                    if (!ev) return;
+                    closeModal('infoModal');
+                    
+                    // Populate modal with current data
+                    document.getElementById('editingEventId').value = ev.id;
+                    document.getElementById('eventTitle').value = ev.topic;
+                    document.getElementById('eventDaySelect').value = ev.day;
+                    document.getElementById('classCode').value = ev.code;
+                    document.getElementById('className').value = ev.subject;
+
+                    openAddModal(ev.day, true);
+                }
+
+                window.onclick = function(event) {
+                    if (event.target.classList.contains('modal-overlay')) {
+                        event.target.style.display = "none";
+                    }
+                }
+            </script>
+    </main>
+
+
+	<footer class="main-footer">
+    <div class="footer-container">
+        
+        <div class="footer-logo">
+            <img src="../css/lgBK.png" alt="Logo Bách Khoa"> <p style="text-align:center;">BÁCH KHOA MY TUTOR</span>
+        </div>
+        <div class="footer-links">
+            <h3>WEBSITE</h3>
+            <a href="#">HCMUT</a>
+            <a href="#">MyBK</a>
+            <a href="#">BKSI</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>CONTACT</h3>
+            <p>268 Ly Thuong Kiet Street Ward 14, District 10, Ho Chi Minh City, Vietnam</p>
+            <p>(028) 38 651 670 - (028) 38 647 256 (Ext: 5258, 5234)</p>
+            <p><a href="mailto:xxxxxxxxx@hcmut.edu.vn">xxxxxxxxx@hcmut.edu.vn</a></p>
+        </div>
+    </div>
+</footer>
+<script>
+    // Modal functionality
+    const addClassModal = document.getElementById('addClassModal');
+    const classInfoModal = document.getElementById('classInfoModal');
+    const closeButtons = document.querySelectorAll('.close');
+    const calendarDays = document.querySelectorAll('.calendar-day');
+    const eventTitles = document.querySelectorAll('.event-title');
+
+    // Open Add Class Modal when clicking on calendar day (not on event title)
+    calendarDays.forEach(day => {
+        day.addEventListener('click', (e) => {
+            // Don't open if clicking on event title
+            if (e.target.classList.contains('event-title')) {
+                return;
+            }
+            addClassModal.classList.add('show');
+        });
+    });
+
+    // Open Class Information Modal when clicking on event title
+    eventTitles.forEach(title => {
+        title.addEventListener('click', (e) => {
+            e.stopPropagation();
+            classInfoModal.classList.add('show');
+        });
+    });
+
+    // Close modals
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            addClassModal.classList.remove('show');
+            classInfoModal.classList.remove('show');
+        });
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', (e) => {
+        if (e.target === addClassModal) {
+            addClassModal.classList.remove('show');
+        }
+        if (e.target === classInfoModal) {
+            classInfoModal.classList.remove('show');
+        }
+    });
+</script>
+</body>
+</html>

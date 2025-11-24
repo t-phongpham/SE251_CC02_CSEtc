@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Central Authentication Service</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <header>
+            <img src="logoBK.png" alt="Logo BK" class="logo">
+            <h1>Central Authentication Service</h1>
+        </header>
+
+        <main>
+            <div class="login-box">
+                <h2>Enter your Username and Password</h2>
+                
+                <form id="loginForm" method="get">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Select Role</label>
+                        <select id="role" name="role" required>
+                            <option value="">-- Select Role --</option>
+                            <option value="student">Student</option>
+                            <option value="tutor">Tutor</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-options">
+                        <input type="checkbox" id="warn" name="warn">
+                        <label for="warn">Warn me before logging me into other sites</label>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit">Login</button>
+                        <button type="reset">Clear</button>
+                    </div>
+
+                    <a href="#" class="change-password">Change password?</a>
+                </form>
+
+                <script>
+                    document.getElementById('loginForm').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const role = document.getElementById('role').value;
+                        let redirectUrl = '';
+                        
+                        if (role === 'student') {
+                            redirectUrl = '../Student_Homepage/Student_Homepage.html';
+                        } else if (role === 'tutor') {
+                            redirectUrl = '../Tutor_Homepage/Tutor_Homepage.html';
+                        }
+                        
+                        if (redirectUrl) {
+                            window.location.href = redirectUrl;
+                        }
+                    });
+                </script>
+            </div>
+
+            <div class="info-box">
+                <div class="info-section">
+                    <h3>Languages</h3>
+                    <a href="#">Vietnamese</a> | <a href="#">English</a>
+                </div>
+
+                <div class="info-section">
+                    <h3>Please note</h3>
+                    <p>The Login page enables single sign-on to multiple websites at HCMUT. This means that you only have to enter your user name and password once for websites that subscribe to the Login page.</p>
+                    <p>You will need to use your HCMUT Username and password to login to this site. The "HCMUT" account provides access to many resources including the HCMUT Information System, e-mail, ...</p>
+                    <p>For security reasons, please Exit your web browser when you are done accessing services that require authentication!</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Technical support</h3>
+                    <p>E-mail: <a href="mailto:support@hcmut.edu.vn">support@hcmut.edu.vn</a></p>
+                    <p>Tel: (84-8) 38647256 - 7204</p>
+                </div>
+            </div>
+        </main>
+
+    </div> <footer>
+        <p>Copyright © 2011 - 2012 Ho Chi Minh University of Technology. All rights reserved.</p>
+        <p>Powered by <a href="#">JASIG CAS 3.5.1</a></p>
+    </footer>
+
+</body>
+</html>

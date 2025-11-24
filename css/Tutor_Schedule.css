@@ -1,0 +1,368 @@
+:root {
+            --primary-blue: #0056b3;
+            --hover-blue: #9EE5FD;
+            --border-color: #e0e0e0;
+            --text-color: #333;
+            --danger-color: #dc3545;
+            --input-border: #aaa; 
+            --input-bg: #f9f9f9; 
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #fff;
+        }
+
+        /* --- Calendar Header --- */
+        .calendar-header {
+            position: relative; /* Needed to allow absolute positioning of the title */
+            display: flex;
+            justify-content: center; /* This moves the month-nav to the center */
+            align-items: center;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            margin-left: 200px;
+            margin-right: 200px;
+            height: 40px; /* Ensures the header has height even if items are absolute */
+        }
+
+        .main-title {
+            position: absolute; /* Take out of flow to pin to the left */
+            left: 0;
+            color: var(--primary-blue);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #00aaff;
+            cursor: pointer;
+            /* No extra positioning needed, the parent centers it */
+        }
+
+        .current-month {
+            font-size: 28px;
+            color: var(--primary-blue);
+        }
+
+        /* --- Calendar Grid --- */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            border-top: 1px dotted var(--border-color);
+            border-left: 1px dotted var(--border-color);
+            margin-left: 200px;
+            margin-right: 200px;
+            margin-bottom: 60px;
+        }
+
+        .day-name {
+            padding: 10px;
+            font-weight: bold;
+            color: #555;
+            border-bottom: 1px dotted var(--border-color);
+            border-right: 1px dotted var(--border-color);
+            background-color: #fafafa;
+        }
+
+        .day-cell {
+            min-height: 120px;
+            border-bottom: 1px dotted var(--border-color);
+            border-right: 1px dotted var(--border-color);
+            padding: 10px;
+            position: relative;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            overflow: hidden; /* Keeps content inside */
+        }
+
+        .day-cell:hover {
+            background-color: var(--hover-blue);
+        }
+
+        .day-number {
+            color: #666;
+            margin-bottom: 5px;
+            pointer-events: none; 
+        }
+
+        /* --- Event Styling (UPDATED for Truncation) --- */
+        .event-item {
+            font-size: 12px;
+            color: #0088cc;
+            margin-top: 4px;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.7);
+            font-weight: 500;
+
+            /* CSS Truncation Logic */
+            white-space: nowrap;      /* Prevent text wrapping to next line */
+            overflow: hidden;         /* Hide overflow content */
+            text-overflow: ellipsis;  /* Add "..." at the end */
+            display: block;           /* Necessary for width calculation */
+            max-width: 100%;          /* Ensure it doesn't overflow cell */
+        }
+
+        .event-item:hover {
+            text-decoration: underline;
+            background: #fff;
+        }
+
+        /* --- Modals (Overlay) --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 95%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header.info-header {
+            background-color: #FFD8C2; 
+            color: var(--primary-blue);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+            color: #888;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        /* --- Form Styles --- */
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 110px;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .form-control {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: #555;
+            height: 38px;
+            font-size: 14px;
+        }
+
+        select.form-control {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 30px;
+        }
+        
+        .input-group-row {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            align-items: center;
+        }
+
+        .btn-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* Info Modal Styles */
+        .info-row {
+            margin-bottom: 15px;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .info-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .action-icon {
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+        }
+        .action-icon:hover {
+            color: #333;
+        }
+
+        /* Alert Modal */
+        .alert-content {
+            text-align: center;
+            padding: 30px;
+        }
+        .alert-icon {
+            background-color: #ff4444;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 15px auto;
+        }
+        .alert-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+
+.hero-section {
+    width: 1521px;
+    height: 480px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.cards-section {
+    background-color: #F8F8F8;
+    padding: 50px 0;
+    width: 100%;
+}
+
+.cards-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 92px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.content-card {
+    width: 306px;
+    height: 436px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.content-card img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+.content-card .card-button {
+    background-color: #0388B4;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 40px 0;
+    display: inline-block;
+    min-width: 130px;
+    transition: background-color 0.2s ease;
+}
+
+.content-card .card-button:hover {
+    background-color: #044CC8;
+}
+
+.content-card p {
+    font-size: 14px;
+    color: #676C70;
+    line-height: 28px;
+    font-weight: 300;
+}
+
+
+

@@ -1,0 +1,167 @@
+:root {
+    --primary-blue: #0388B4;
+    --dark-blue-highlight: #044CC8;
+    --light-grey-bg: #F5F5F5;
+    --border-grey: #D9D9D9;
+    --text-dark: #1E1E1E;
+    --text-secondary: #757575;
+}
+
+
+.page-content-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+    display: flex;
+    gap: 32px;
+    box-sizing: border-box;
+}
+
+
+/* FILTER */
+.filter-sidebar {
+    flex-basis: 240px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    padding: 16px;
+    height: fit-content;
+}
+
+.filter-section {
+    margin-bottom: 24px;
+}
+
+.filter-section h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 12px 0;
+    color: var(--text-dark);
+}
+
+.keywords-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.keyword-tag {
+    background: var(--light-grey-bg);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.keyword-tag button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 12px;
+}
+
+
+/* TUTOR CONTENT */
+.tutor-content {
+    flex: 1;
+}
+
+.tutor-search-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.tutor-search-filters input[type="search"] {
+    width: 327px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-grey);
+    border-radius: 9999px;
+    font-size: 16px;
+}
+
+.filter-buttons button {
+    background-color: var(--light-grey-bg);
+    color: var(--text-secondary);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.filter-buttons button.active {
+    background-color: var(--dark-blue-highlight);
+    color: white;
+}
+
+
+.tutor-grid {
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.tutor-card {
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: box-shadow 0.2s ease;
+}
+
+.tutor-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tutor-card img {
+    width: 100%;
+    height: 247px;
+    object-fit: cover;
+    background-color: #E3E3E3;
+}
+
+.tutor-card-info {
+    padding: 16px;
+}
+
+.tutor-card-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.tutor-card-info p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+    min-height: 2.4em;
+}
+
+.tutor-card-info .rating {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-grey);
+}
