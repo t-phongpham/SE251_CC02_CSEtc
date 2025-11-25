@@ -19,7 +19,8 @@
             <div class="login-box">
                 <h2>Enter your Username and Password</h2>
                 
-                <form action="../Student_Homepage/Student_Homepage.html" method="get"> <div class="form-group">
+                <form id="loginForm" method="get">
+                    <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username">
                     </div>
@@ -27,6 +28,16 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Select Role</label>
+                        <select id="role" name="role" required>
+                            <option value="">-- Select Role --</option>
+                            <option value="student">Student</option>
+                            <option value="tutor">Tutor</option>
+                            <option value="admin">Admin</option>
+                        </select>
                     </div>
 
                     <div class="form-options">
@@ -41,6 +52,28 @@
 
                     <a href="#" class="change-password">Change password?</a>
                 </form>
+<<<<<<< HEAD
+=======
+
+                <script>
+                    document.getElementById('loginForm').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const role = document.getElementById('role').value;
+                        let redirectUrl = '';
+                        
+                        if (role === 'student') {
+                            redirectUrl = '../Student_Homepage/Student_Homepage.html';
+                        } else if (role === 'tutor') {
+                            redirectUrl = '../Tutor_Homepage/Tutor_Homepage.html';
+                        }
+                        
+                        if (redirectUrl) {
+                            window.location.href = redirectUrl;
+                        }
+                    });
+                </script>
+>>>>>>> origin/master
             </div>
 
             <div class="info-box">

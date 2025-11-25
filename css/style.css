@@ -92,6 +92,13 @@ a {
     line-height: 1.8;
 }
 
+.main-footer {
+    background-image:  url('../css/Footer.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .footer-container {
     width: 1200px;
     margin: 0 auto;
