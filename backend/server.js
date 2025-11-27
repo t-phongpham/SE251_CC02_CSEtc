@@ -13,22 +13,22 @@ app.use(express.urlencoded({ extended: true }));
 // Session để nhớ user đã đăng nhập
 app.use(
   session({
-    secret: 'secret-key-123', // đổi thành chuỗi bất kỳ
+    secret: 'secret-key-123', 
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// Hardcode tài khoản (ví dụ)
+// account
 const USERS = [
-  { username: 'student', password: '123456', role: 'student' },
-  { username: 'tutor', password: '654321', role: 'tutor' },
+  { username: 'nam.buixuan', password: '123456', role: 'student' },
+  { username: 'anguyenvan', password: '654321', role: 'tutor' },
 ];
 
 // Middleware: bắt buộc login
 function requireLogin(req, res, next) {
   if (req.session && req.session.user) return next();
-  return res.redirect('/login');
+  return res.redirect('/');
 }
 
 // Middleware: kiểm tra đúng role
@@ -41,7 +41,7 @@ function requireRole(role) {
   };
 }
 
-// Serve toàn bộ frontend như static (giữ nguyên như bạn)
+// Serve static frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ================== ROUTES GIAO DIỆN ================== //
@@ -53,9 +53,17 @@ app.get('/', (req, res) => {
   );
 });
 
-// LoginPage – public
+// LoginPage: chỉ cho vào nếu có ?role=student|tutor|admin
 app.get('/login', (req, res) => {
-  res.sendFile(
+  const { role } = req.query;
+
+  const allowedRoles = ['student', 'tutor', 'admin'];
+  if (!role || !allowedRoles.includes(role)) {
+    // không có role hợp lệ -> quay về Landing
+    return res.redirect('/');
+  }
+
+  return res.sendFile(
     path.join(__dirname, '../frontend/LoginPage/LoginPage.html')
   );
 });
@@ -90,47 +98,49 @@ app.get(
   }
 );
 
-// Logout
-app.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/');
-  });
-});
+// ============= LOGIN / LOGOUT ============= //
 
-// ================== ROUTE XỬ LÝ LOGIN ================== //
-
+// POST /login: 1 endpoint duy nhất, role do tài khoản quyết định
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const role = req.query.role; // lấy từ ?role=student / ?role=tutor
+  const { username, password, role: roleFromForm } = req.body;
 
-  // Nếu không có role (vào /login trực tiếp) thì xem là lỗi
-  if (!role || !['student', 'tutor'].includes(role)) {
-    return res.redirect('/login?error=1');
-  }
-
+  // Tìm user theo username + password
   const user = USERS.find(
-    (u) => u.username === username && u.password === password && u.role === role
+    (u) => u.username === username && u.password === password
   );
 
   if (!user) {
-    // Sai username/password hoặc không khớp role
-    return res.redirect(`/login?role=${role}&error=1`);
+    // Sai username/password -> quay lại login tương ứng (nếu có roleFromForm), hoặc mặc định student
+    const safeRole =
+      roleFromForm && ['student', 'tutor', 'admin'].includes(roleFromForm)
+        ? roleFromForm
+        : 'student';
+
+    return res.redirect(`/login?role=${safeRole}&error=1`);
   }
 
-  // Lưu user vào session
+  // Lưu thông tin user vào session
   req.session.user = {
     username: user.username,
     role: user.role,
   };
 
-  // Điều hướng theo role
-  if (role === 'student') {
+  // Điều hướng theo role của user (role do tài khoản quyết định)
+  if (user.role === 'student') {
     return res.redirect('/student/home');
-  } else if (role === 'tutor') {
+  } else if (user.role === 'tutor') {
     return res.redirect('/tutor/home');
   }
 
+  // Nếu sau này có admin, có thể redirect riêng
   return res.redirect('/');
+});
+
+// Logout: luôn về LandingPage
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 });
 
 // ================== API VÍ DỤ ================== //
@@ -620,12 +630,6 @@ app.get('/api/schedules/available', requireLogin, requireRole('student'), (req, 
   }
   
   res.json(available);
-});
-
-// ================== START SERVER ================== //
-
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
 });
 
 // ================== START SERVER ================== //

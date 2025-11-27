@@ -13,6 +13,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.querySelector('.user-dropdown-toggle');
+        const menu = document.querySelector('.user-dropdown-menu');
+
+        if (!toggle || !menu) return;
+
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            menu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function () {
+            menu.classList.remove('show');
+        });
+    });
+</script>
+
 <body>
 
     <header class="main-header">
@@ -32,10 +51,20 @@
             </nav>
 
             <div class="user-nav">
-                <img src="../css/Bell.svg" alt="Icon 1">
-                <img src="../css/Message circle.svg" alt="Icon 2">
-                <img src="../css/avatar.png" alt="Avatar" class="avatar">
-                <img src="../css/Chevron down.svg" alt="Dropdown">
+                <img src="/css/Bell.svg" alt="Notifications">
+                <img src="/css/Message circle.svg" alt="Messages">
+
+                <div class="user-dropdown">
+                    <button type="button" class="user-dropdown-toggle">
+                        <img src="/css/avatar.png" alt="Avatar" class="avatar">
+                        <img src="/css/Chevron down.svg" alt="Dropdown">
+                    </button>
+
+                    <div class="user-dropdown-menu">
+                        <a href="#">Profile Info</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
