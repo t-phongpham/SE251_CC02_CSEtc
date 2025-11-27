@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - Central Authentication Service</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/LoginPage/login.css">
 </head>
 <body>
 
     <div class="page-container">
         
         <header>
-            <img src="logoBK.png" alt="Logo BK" class="logo">
+            <img src="/LoginPage/logoBK.png" alt="Logo BK" class="logo">
             <h1>Central Authentication Service</h1>
         </header>
 
@@ -19,25 +19,16 @@
             <div class="login-box">
                 <h2>Enter your Username and Password</h2>
                 
-                <form id="loginForm" method="get">
+                <!-- Gửi thẳng về /login (giữ lại query ?role=...) -->
+                <form id="loginForm" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username">
+                        <input type="text" id="username" name="username" required>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Select Role</label>
-                        <select id="role" name="role" required>
-                            <option value="">-- Select Role --</option>
-                            <option value="student">Student</option>
-                            <option value="tutor">Tutor</option>
-                            <option value="admin">Admin</option>
-                        </select>
+                        <input type="password" id="password" name="password" required>
                     </div>
 
                     <div class="form-options">
@@ -54,20 +45,18 @@
                 </form>
 
                 <script>
-                    document.getElementById('loginForm').addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        
-                        const role = document.getElementById('role').value;
-                        let redirectUrl = '';
-                        
-                        if (role === 'student') {
-                            redirectUrl = '../Student_Homepage/Student_Homepage.html';
-                        } else if (role === 'tutor') {
-                            redirectUrl = '../Tutor_Homepage/Tutor_Homepage.html';
-                        }
-                        
-                        if (redirectUrl) {
-                            window.location.href = redirectUrl;
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const params = new URLSearchParams(window.location.search);
+
+                        // Nếu backend redirect về /login?error=1 thì hiện thông báo
+                        const error = params.get('error');
+                        if (error === '1') {
+                            alert('Sai username hoặc password. Vui lòng thử lại.');
+
+                            // Xoá ?error=1 khỏi URL cho đẹp
+                            const url = new URL(window.location);
+                            url.searchParams.delete('error');
+                            window.history.replaceState({}, '', url);
                         }
                     });
                 </script>
@@ -94,7 +83,8 @@
             </div>
         </main>
 
-    </div> <footer>
+    </div>
+    <footer>
         <p>Copyright © 2011 - 2012 Ho Chi Minh University of Technology. All rights reserved.</p>
         <p>Powered by <a href="#">JASIG CAS 3.5.1</a></p>
     </footer>

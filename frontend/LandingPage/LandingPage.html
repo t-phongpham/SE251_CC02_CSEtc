@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page - My Tutor</title>
-    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="/LandingPage/landing.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
@@ -14,23 +14,26 @@
     <div class="landing-container">
         
         <header class="landing-header">
-            <img src="logoBK.png" alt="Bách Khoa My Tutor Logo" class="main-logo">
+            <img src="/LandingPage/logoBK.png" alt="Bách Khoa My Tutor Logo" class="main-logo">
         </header>
 
         <main class="role-selector">
             
-            <a href="../LoginPage/LoginPage.html" class="role-card">
-                <img src="Tutor.png" alt="Tutor Icon" class="role-icon">
+            <!-- Tutor: chuyển tới login với role = tutor -->
+            <a href="/login?role=tutor" class="role-card">
+                <img src="/LandingPage/Tutor.png" alt="Tutor Icon" class="role-icon">
                 <span class="role-name">Tutor</span>
             </a>
 
-            <a href="../LoginPage/LoginPage.html" class="role-card">
-                <img src="Student.png" alt="Student Icon" class="role-icon">
+            <!-- Student: chuyển tới login với role = student -->
+            <a href="/login?role=student" class="role-card">
+                <img src="/LandingPage/Student.png" alt="Student Icon" class="role-icon">
                 <span class="role-name">Student</span>
             </a>
 
-            <a href="../LoginPage/LoginPage.html" class="role-card">
-                <img src="Gear.png" alt="Admin Icon" class="role-icon">
+            <!-- Admin: nút tĩnh, chưa hiện thực flow -->
+            <a href="#" class="role-card" style="pointer-events: none; opacity: 0.6;">
+                <img src="/LandingPage/Gear.png" alt="Admin Icon" class="role-icon">
                 <span class="role-name">Admin</span>
             </a>
 
