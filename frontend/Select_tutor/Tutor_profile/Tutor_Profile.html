@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor profile - Nguyễn Văn B</title>
+    <title>Tutor profile</title>
     
     <link rel="stylesheet" href="../../css/style.css">
-    
     <link rel="stylesheet" href="../../css/tutorprofile.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +17,7 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo-container">
-                <img src="../lgBK.png" alt="Logo Bách Khoa">
+                <img src="/Select_Tutor/lgBK.png" alt="Logo Bách Khoa">
             </div>
             
             <nav class="main-nav">
@@ -45,25 +44,25 @@
         <nav class="breadcrumbs">
             <a href="../Select_Tutor.html">Tutor selection</a>
             <span>></span>
-            <span>Nguyễn Văn B</span>
+            <span id="breadcrumbName">Tutor name</span>
         </nav>
 
         <section class="profile-header-section">
             
             <div class="profile-card">
                 <div class="profile-card-main">
-                    <img src="https://placehold.co/229x247" alt="Hồ sơ Nguyễn Văn B" class="profile-photo">
+                    <!-- THÊM id="tutorPhoto" Ở ĐÂY -->
+                    <img id="tutorPhoto" src="https://placehold.co/229x247" alt="Tutor photo" class="profile-photo">
                     <div class="profile-intro">
-                        <span class="degree">PhD</span>
-                        <h1 class="tutor-name">Nguyễn Văn B</h1>
+                        <span class="degree" id="tutorDegree">Degree</span>
+                        <h1 class="tutor-name" id="tutorName">Tutor Name</h1>
                         <h3>Introduction</h3>
-                        <p>
-                            Mr. Nguyen Van B has strong experience in academic tutoring and student guidance. He has supported learners in mastering coursework, improving study methods, and preparing for examinations. He currently works as a lead tutor in the Faculty of Computer Science.
-                        </p>
+                        <p id="tutorIntro">...</p>
                     </div>
                 </div>
                 <div class="profile-card-footer">
-                    <div class="rating">⭐ 4.8 (12)</div>
+                    <div class="rating" id="tutorRating">⭐ 0.0 (0)</div>
+
                     <div class="action-buttons">
                         <button class="btn-select">Select tutor</button>
                         <button class="btn-message">Send a message</button>
@@ -74,23 +73,23 @@
             <aside class="profile-details">
                 <div class="detail-item">
                     <h4>Position</h4>
-                    <p>Lead academic tutor</p>
+                    <p id="tutorPosition">...</p>
                 </div>
                 <div class="detail-item">
                     <h4>Specialization</h4>
-                    <p>Data Structures & Algorithms</p>
+                    <p id="tutorSpecialization">...</p>
                 </div>
                 <div class="detail-item">
                     <h4>Years of experience</h4>
-                    <p>4 years</p>
+                    <p id="tutorYears">...</p>
                 </div>
                 <div class="detail-item">
                     <h4>Services</h4>
-                    <p>One-on-one tutoring<br>Exam preparation guidance</p>
+                    <p id="tutorServices">...</p>
                 </div>
                 <div class="detail-item">
                     <h4>Educational background</h4>
-                    <p>2021: Bachelor of Computer Science – University of Technology<br>2023: Currently pursuing Master’s degree in Computer Science</p>
+                    <p id="tutorEducation">...</p>
                 </div>
             </aside>
         </section>
@@ -98,49 +97,7 @@
         <hr class="divider">
 
         <section class="reviews-section">
-            <div class="reviews-grid">
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="student-name">Student A</span>
-                        <span class="review-rating">5.0 ⭐</span>
-                    </div>
-                    <p class="review-body">
-                        <i>"One of the best tutors I’ve had. They explain algorithms visually and step-by-step, making tough ideas easy to understand. Highly recommended for anyone struggling with DSA."</i>
-                    </p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="student-name">Anonymous user</span>
-                        <span class="review-rating">4.8 ⭐</span>
-                    </div>
-                    <p class="review-body">
-                        <i>"I really benefited from the explanations on linked lists and binary trees. The tutor uses simple analogies to explain complex structures, which makes learning easier."</i>
-                    </p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="student-name">Student C</span>
-                        <span class="review-rating">4.0 ⭐</span>
-                    </div>
-                    <p class="review-body">
-                        <i>"Thanks to the tutor, I now feel more confident solving algorithm questions. The breakdown of time complexity was especially clear, and I appreciate the real-world examples."</i>
-                    </p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="student-name">Anonymous user</span>
-                        <span class="review-rating">4.5 ⭐</span>
-                    </div>
-                    <p class="review-body">
-                        <i>"Great teaching style. The tutor doesn’t just provide solutions but also trains you to think like a programmer. My understanding of recursion and dynamic programming improved a lot."</i>
-                    </p>
-                </div>
-
-            </div>
+            <div class="reviews-grid" id="reviewsGrid"></div>
         </section>
 
     </div>
@@ -148,7 +105,7 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="../css/lgBK.png" alt="Logo Bách Khoa">
+                <img src="/Select_Tutor/lgBK.png" alt="Logo Bách Khoa">
                 <p style="text-align:center;">BÁCH KHOA MY TUTOR</p>
             </div>
             <div class="footer-links">
@@ -166,20 +123,102 @@
         </div>
     </footer>
 
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
 
-<script>
-    const selectButton = document.querySelector('.btn-select');
-    const messageButton = document.querySelector('.btn-message');
-    
-    const actionButtons = [selectButton, messageButton];
+        document.addEventListener('DOMContentLoaded', function () {
+            const id = getQueryParam('id');
 
-    actionButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.classList.toggle('active');
+            if (!id) {
+                console.error('No tutor id in URL');
+                alert('Cannot load tutor profile (missing id).');
+                return;
+            }
+
+            console.log('Loading tutor with id =', id);
+
+            fetch('/api/tutors/' + encodeURIComponent(id))
+                .then(res => {
+                    console.log('Response status:', res.status);
+                    if (!res.ok) {
+                        throw new Error('Tutor not found');
+                    }
+                    return res.json();
+                })
+                .then(tutor => {
+                    console.log('Tutor data:', tutor);
+
+                    // Header
+                    document.getElementById('tutorName').textContent = tutor.name;
+                    document.getElementById('breadcrumbName').textContent = tutor.name;
+                    document.getElementById('tutorDegree').textContent = tutor.degree || '';
+                    document.getElementById('tutorIntro').textContent = tutor.intro || '';
+
+                    const photoEl = document.getElementById('tutorPhoto');
+                    if (photoEl && tutor.photoUrl) {
+                        photoEl.src = tutor.photoUrl;
+                    }
+
+                    // Details
+                    document.getElementById('tutorPosition').textContent = tutor.position || '';
+                    document.getElementById('tutorSpecialization').textContent = tutor.specialization || '';
+                    document.getElementById('tutorYears').textContent =
+                        tutor.yearsOfExperience ? tutor.yearsOfExperience + ' years' : '';
+
+                    document.getElementById('tutorServices').innerHTML =
+                        (tutor.services || []).join('<br>');
+
+                    document.getElementById('tutorEducation').innerHTML =
+                        (tutor.education || '').replace(/\n/g, '<br>');
+
+                    document.getElementById('tutorRating').textContent =
+                        `⭐ ${tutor.rating} (${tutor.ratingCount})`;
+
+                    // Reviews
+                    const reviewsGrid = document.getElementById('reviewsGrid');
+                    if (reviewsGrid && tutor.reviews && tutor.reviews.length) {
+                        reviewsGrid.innerHTML = '';
+                        tutor.reviews.forEach(r => {
+                            const card = document.createElement('div');
+                            card.className = 'review-card';
+                            card.innerHTML = `
+                                <div class="review-header">
+                                    <span class="student-name">${r.studentName}</span>
+                                    <span class="review-rating">${r.rating} ⭐</span>
+                                </div>
+                                <p class="review-body">
+                                    <i>${r.body}</i>
+                                </p>
+                            `;
+                            reviewsGrid.appendChild(card);
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading tutor profile:', err);
+                    alert('Cannot load tutor profile.');
+                });
+
+            const selectButton = document.querySelector('.btn-select');
+            const messageButton = document.querySelector('.btn-message');
+
+            if (selectButton) {
+                selectButton.addEventListener('click', () => {
+                    selectButton.classList.toggle('active');
+                    alert('Đăng kí thành công');
+                });
+            }
+
+            // if (messageButton) {
+            //     messageButton.addEventListener('click', () => {
+            //         messageButton.classList.toggle('active');
+            //     });
+            // }
         });
-    });
-
-</script>
+    </script>
 
 </body>
 </html>

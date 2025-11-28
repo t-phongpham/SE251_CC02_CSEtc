@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <header class="main-header">
@@ -90,44 +91,7 @@
                 </div>
             </div>
 
-            <div class="tutor-grid">
-                
-                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
-                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
-                    <div class="tutor-card-info">
-                        <h3>Nguyễn Văn A</h3>
-                        <p>Calculus 1</p>
-                        <div class="rating">⭐ 4.5 (25)</div>
-                    </div>
-                </a>
-
-                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
-                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
-                    <div class="tutor-card-info">
-                        <h3>Nguyễn Văn B</h3>
-                        <p>Data Structures & Algorithms</p>
-                        <div class="rating">⭐ 4.9 (5)</div>
-                    </div>
-                </a>
-
-                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
-                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
-                    <div class="tutor-card-info">
-                        <h3>Nguyễn Văn C</h3>
-                        <p>Data Structures & Algorithms</p>
-                        <div class="rating">⭐ 4.5 (20)</div>
-                    </div>
-                </a>
-
-                <a href="Tutor_profile/Tutor_Profile.html" class="tutor-card">
-                    <img src="https://placehold.co/229x247" alt="Tutor Photo">
-                    <div class="tutor-card-info">
-                        <h3>Nguyễn Văn D</h3>
-                        <p>Software Engineering</p>
-                        <div class="rating">⭐ 4.0 (50)</div>
-                    </div>
-                </a>
-
+            <div id="tutorGrid" class="tutor-grid">
                 </div>
         </main>
 
@@ -155,6 +119,39 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const grid = document.getElementById('tutorGrid');
+
+            fetch('/api/tutors')
+                .then(res => res.json())
+                .then(tutors => {
+                    grid.innerHTML = '';
+
+                    tutors.forEach(tutor => {
+                        const card = document.createElement('a');
+                        card.href = `Tutor_profile/Tutor_Profile.html?id=${tutor.id}`;
+                        card.className = 'tutor-card';
+
+                        card.innerHTML = `
+                            <img src="${tutor.photoUrl}" alt="Tutor Photo">
+                            <div class="tutor-card-info">
+                                <h3>${tutor.name}</h3>
+                                <p>${tutor.title}</p>
+                                <div class="rating">⭐ ${tutor.rating} (${tutor.ratingCount})</div>
+                            </div>
+                        `;
+
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error loading tutors', err);
+                    grid.innerHTML = '<p>Cannot load tutors at the moment.</p>';
+                });
+        });
+    </script>
 
 </body>
 </html>

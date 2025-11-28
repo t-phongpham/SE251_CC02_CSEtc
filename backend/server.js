@@ -6,6 +6,8 @@ const cron = require('node-cron');
 const app = express();
 const PORT = 3000;
 
+const tutors = require('./data/tutors'); 
+
 // Đọc JSON / form-data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -153,6 +155,23 @@ app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
   console.log('Contact form:', name, email, message);
   res.json({ status: 'ok', msg: 'Đã nhận form!' });
+});
+
+// Lấy tất cả tutor
+app.get('/api/tutors', (req, res) => {
+  res.json(tutors);
+});
+
+// Lấy chi tiết 1 tutor theo id
+app.get('/api/tutors/:id', (req, res) => {
+  const { id } = req.params;
+  const tutor = tutors.find((t) => t.id === id);
+
+  if (!tutor) {
+    return res.status(404).json({ error: 'Tutor not found' });
+  }
+
+  res.json(tutor);
 });
 
 // Mock database for schedules
