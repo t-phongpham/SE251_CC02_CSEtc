@@ -54,7 +54,7 @@
 
         <div class="session-list">
             
-            <div class="session-card" id="session-card-1" onclick="openModal()">
+            <div class="session-card" id="session-card-1">
                 <div class="card-header">
                     <span class="session-number">1</span>
                     <h3 class="session-title">CO3001 - Software Engineering</h3>
@@ -88,32 +88,6 @@
                         </div>
                     </div>
                     <hr class="timeslot-divider">
-                    <div class="timeslot-row">
-                        <div class="detail-item">
-                            <h4>Group code</h4>
-                            <p>CC09</p>
-                        </div>
-                        <div class="detail-item">
-                            <h4>Capacity</h4>
-                            <p>2/5</p>
-                        </div>
-                        <div class="detail-item">
-                            <h4>Day</h4>
-                            <p>Wednesday</p>
-                        </div>
-                        <div class="detail-item">
-                            <h4>Time slot</h4>
-                            <p>-23-------------</p>
-                        </div>
-                        <div class="detail-item">
-                            <h4>Teaching week</h4>
-                            <p>45</p>
-                        </div>
-                        <div class="detail-item">
-                            <h4>Room</h4>
-                            <p>B4 - 201</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -270,7 +244,8 @@
                         <td>Tuesday</td>
                         <td>-23-------------</td>
                         <td>B1 - 201</td>
-                        <td><button class="btn-delete-red" onclick="deleteCurrentGroup(this)">🗑️</button></td>
+                        <td><button class="btn-delete-red" onclick="unselectCurrentGroup(this)">Bỏ chọn</button>
+</td>
                     </tr>
                     <tr>
                         <td>CC04</td>
@@ -344,53 +319,230 @@
 </div>
 
 <script>
-    var changeModal = document.getElementById("changeGroupModal");
-    var warningModal = document.getElementById("actionAllowedModal");
+    let currentSelectedRow = null; 
+let selectedNewGroup = null;
+let currentEditingCard = null; // Thêm biến này để track card đang edit
 
-    var userHasCurrentGroup = true; 
+var changeModal = document.getElementById("changeGroupModal");
+var warningModal = document.getElementById("actionAllowedModal");
 
-    function openModal() {
-        userHasCurrentGroup = true; 
-        changeModal.style.display = "flex";
-    }
+var userHasCurrentGroup = true;
 
-    function closeModal() {
-        changeModal.style.display = "none";
-    }
-
-
-    function openWarningModal() {
-        warningModal.style.display = "flex";
-    }
-
-    function closeWarningModal() {
-        warningModal.style.display = "none";
-    }
-
-
-    function deleteCurrentGroup(buttonElement) {
-        buttonElement.closest('tr').remove();
-        userHasCurrentGroup = false; 
-    }
-
-    function attemptChangeGroup() {
-        if (userHasCurrentGroup) {
-            openWarningModal();
-        } 
-        else {
-            alert("Success! Group has been changed.");
-            closeModal();
+// Click vào card body để mở modal
+document.querySelectorAll(".session-card").forEach(card => {
+    card.addEventListener("click", function(e) {
+        // Không mở modal nếu click vào nút delete
+        if (e.target.classList.contains('delete-btn')) {
+            return;
         }
+        currentEditingCard = card; // Lưu lại card đang được edit
+        openModal();
+    });
+});
+
+// Xử lý nút delete
+document.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", function(event) {
+        event.stopPropagation(); 
+
+        if (!confirm("Bạn có chắc muốn xoá môn học này?")) return;
+
+        const card = btn.closest(".session-card");
+        card.remove();
+
+        alert("Xoá thành công!");
+    });
+});
+
+// Khởi tạo event listeners cho tất cả các nút Change ban đầu
+function initializeChangeButtons() {
+    document.querySelectorAll(".btn-change-blue").forEach(btn => {
+        // Kiểm tra xem đã có listener chưa
+        if (!btn.hasAttribute('data-listener')) {
+            btn.setAttribute('data-listener', 'true');
+            btn.addEventListener('click', function() {
+                attemptChangeGroup(this);
+            });
+        }
+    });
+    
+    // Khởi tạo cho nút "Bỏ chọn" ban đầu
+    document.querySelectorAll(".btn-delete-red").forEach(btn => {
+        if (!btn.hasAttribute('data-listener')) {
+            btn.setAttribute('data-listener', 'true');
+            btn.addEventListener('click', function() {
+                unselectCurrentGroup(this);
+            });
+        }
+    });
+}
+
+function openModal() {
+    userHasCurrentGroup = true; 
+    currentSelectedRow = document.querySelector(".current-group"); // Tìm row hiện tại
+    changeModal.style.display = "flex";
+    
+    // Khởi tạo lại event listeners cho các nút trong modal
+    initializeChangeButtons();
+}
+
+function closeModal() {
+    changeModal.style.display = "none";
+    currentEditingCard = null;
+    selectedNewGroup = null;
+}
+
+function openWarningModal() {
+    warningModal.style.display = "flex";
+}
+
+function closeWarningModal() {
+    warningModal.style.display = "none";
+}
+
+function unselectCurrentGroup(btn) {
+    const row = btn.closest("tr");
+
+    // Đổi nút đỏ → nút chọn
+    row.classList.remove("current-group");
+    
+    // Tạo nút mới với event listener đúng cách
+    const td = row.querySelector("td:last-child");
+    td.innerHTML = '';
+    const newBtn = document.createElement('button');
+    newBtn.className = 'btn-change-blue';
+    newBtn.textContent = 'Change';
+    newBtn.addEventListener('click', function() {
+        selectGroup(this);
+    });
+    td.appendChild(newBtn);
+
+    currentSelectedRow = null; 
+    userHasCurrentGroup = false;
+}
+
+function attemptChangeGroup(btn) {
+    const row = btn.closest("tr");
+    
+    if (userHasCurrentGroup) {
+        // Nếu đã có nhóm hiện tại, hiển thị cảnh báo
+        openWarningModal();
+    } 
+    else {
+        // Nếu chưa có nhóm (đã bỏ chọn), cho phép chọn nhóm mới
+        selectGroup(btn);
+        alert("Đổi nhóm thành công!");
+        closeModal();
+    }
+}
+
+function attemptChangeGroup(btn) {
+    const row = btn.closest("tr");
+    
+    if (userHasCurrentGroup) {
+        // Nếu đã có nhóm hiện tại, hiển thị cảnh báo
+        openWarningModal();
+    } 
+    else {
+        // Nếu chưa có nhóm (đã bỏ chọn), cho phép chọn nhóm mới
+        selectGroup(btn);
+        alert("Đổi nhóm thành công!");
+        closeModal();
+    }
+}
+
+// Hàm này được gọi khi click nút "Change" (Chọn) ở nhóm MỚI
+function selectGroup(btn) {
+    const row = btn.closest("tr");
+
+    // Nếu đang chọn dòng mới → bỏ chọn dòng cũ
+    if (currentSelectedRow && currentSelectedRow !== row) {
+        currentSelectedRow.classList.remove("current-group");
+        
+        // Tạo nút Change mới với event listener
+        const oldTd = currentSelectedRow.querySelector("td:last-child");
+        oldTd.innerHTML = '';
+        const oldBtn = document.createElement('button');
+        oldBtn.className = 'btn-change-blue';
+        oldBtn.textContent = 'Change';
+        oldBtn.addEventListener('click', function() {
+            selectGroup(this);
+        });
+        oldTd.appendChild(oldBtn);
     }
 
-    window.onclick = function(event) {
-        if (event.target == changeModal) {
-            closeModal();
-        }
-        if (event.target == warningModal) {
-            closeWarningModal();
-        }
+    // Đánh dấu dòng mới đang được chọn
+    currentSelectedRow = row;
+
+    row.classList.add("current-group");
+    
+    // Tạo nút Bỏ chọn mới với event listener
+    const newTd = row.querySelector("td:last-child");
+    newTd.innerHTML = '';
+    const newBtn = document.createElement('button');
+    newBtn.className = 'btn-delete-red';
+    newBtn.textContent = 'Bỏ chọn';
+    newBtn.addEventListener('click', function() {
+        confirmChange();
+    });
+    newTd.appendChild(newBtn);
+
+    // Lưu thông tin nhóm đã chọn
+    selectedNewGroup = {
+        group: row.children[0].innerText,
+        capacity: row.children[1].innerText,
+        registered: row.children[2].innerText,
+        day: row.children[3].innerText,
+        time: row.children[4].innerText,
+        room: row.children[5].innerText
+    };
+
+    // ✅ QUAN TRỌNG: Cập nhật card ngay lập tức
+    console.log('Updating card with:', selectedNewGroup); // Debug
+    updateCardWithNewGroup();
+}
+
+function confirmChange() {
+    if (!selectedNewGroup) return;
+
+    alert("Đổi giờ thành công!");
+    closeModal();
+}
+
+function updateCardWithNewGroup() {
+    if (!currentEditingCard || !selectedNewGroup) return;
+
+    // Cập nhật thông tin trong card-body
+    const detailItems = currentEditingCard.querySelectorAll(".detail-item");
+    
+    // Group code (item 0)
+    detailItems[0].querySelector("p").innerText = selectedNewGroup.group;
+    
+    // Capacity (item 1) - cập nhật cả registered/capacity
+    detailItems[1].querySelector("p").innerText = 
+        `${selectedNewGroup.registered}/${selectedNewGroup.capacity}`;
+    
+    // Day (item 2)
+    detailItems[2].querySelector("p").innerText = selectedNewGroup.day;
+    
+    // Time slot (item 3)
+    detailItems[3].querySelector("p").innerText = selectedNewGroup.time;
+    
+    // Teaching week giữ nguyên (item 4)
+    
+    // Room (item 5)
+    detailItems[5].querySelector("p").innerText = selectedNewGroup.room;
+}
+
+// Click outside modal để đóng
+window.onclick = function(event) {
+    if (event.target == changeModal) {
+        closeModal();
     }
+    if (event.target == warningModal) {
+        closeWarningModal();
+    }
+}
 </script>
 
 </body>
